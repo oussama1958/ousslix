@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #141414;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        .login-container {
+            background-color: #222;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        .login-container h2 {
+            margin-top: 0;
+            color: #e50914;
+        }
+        .login-container input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            align-items: center;
+            justify-content: center;
+            border:     color(srgb red rgb(128, 0, 0) rgb(255, 0, 0));
+            border-radius: 30px;
+            background-color: #ffffff;
+            color: #000000;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #e50914;
+            color: #e60f0f;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .login-container button:hover {
+            background-color: #f40612;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2ل></h2>
+        <form id="login-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var accounts = [
+                { username: "oussama.gr_", password: "OUSSAMA2007", url: "https://www.instagram.com/oussama.gr_?igsh=MXdnNzI5OXhod2h1eg=="},
+                { username: "2024002", password: "IDM", url: "PROGGRAMME/تسجيل الغياب.html" },
+                { username: "2024003", password: "IDM", url: "www" },
+                { username: "2024004", password: "IDM", url: "wwww" }
+            ];
+            var found = false;
+            accounts.forEach(function(account) {
+                if (username === account.username && password === account.password) {
+                    window.open(account.url, "_blank");
+                    found = true;
+                }
+            });
+            if (!found) {
+                alert("Invalid username or password");
+            }
+        });
+    </script>
+</body>
+</html>
