@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ousslix</title>
+    <link rel="icon" href="ousslix logo.png" type="image/png">
+    <style>
+                body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #141414;
+            color: #fff;
+        }
+        header {
+            background-color: #000;
+            padding: 15px 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header h1 {
+            margin: 0;
+            color: #e50914;
+            font-size: 2.2em;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .image-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: #222;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+        }
+        .image-section img {
+            width: 120px; /* Adjusted width */
+            height: auto;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+        .image-section h3 {
+            margin: 0;
+            color: #fff;
+            font-size: 1.1em;
+        }
+        .description {
+            background-color: #222;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+            margin-bottom: 20px;
+        }
+        .description h3 {
+            margin: 0;
+            color: #e50914;
+            font-size: 1.3em;
+            border-bottom: 2px solid #e50914;
+            padding-bottom: 5px;
+        }
+        .description p {
+            margin: 10px 0 0;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        .episode-controls {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 0;
+            border-bottom: 2px solid #444;
+            margin-bottom: 20px;
+            background-color: #000; /* Background color to make it distinct */
+            position: sticky;
+            top: 0; /* Position it above the video */
+            z-index: 1000;
+        }
+        .episode-controls button {
+            background-color: #e50914;
+            color: #fff;
+            border: none;
+            padding: 10px 25px; /* Adjusted padding for button size */
+            margin-right: 10px;
+            border-radius: 10px; /* Rounded corners */
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .episode-controls button:hover {
+            background-color: #f40612;
+        }
+        .video-wrapper {
+            background-color: #222;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            max-width: 100%;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid #444; /* Add border to create a special frame */
+            margin-top: 20px; /* Add margin to push the video down */
+        }
+        .video-wrapper h2 {
+            margin: 0;
+            font-size: 1.5em; /* Increased font size for better visibility */
+            color: #fff;
+            background-color: #e50914; /* Red background for the title */
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            font-family: 'Comic Sans MS', cursive, sans-serif; /* Apply cartoonish font */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Optional: add text shadow for better contrast */
+        }
+        .video-wrapper .video-section {
+            position: relative;
+        }
+        .video-wrapper video {
+            width: 100%;
+            height: auto; /* Maintain aspect ratio */
+            max-width: 640px; /* Adjusted width for a smaller size */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+            margin-top: 20px; /* Push the video down */
+        }
+        @media (max-width: 768px) {
+            .video-wrapper video {
+                max-width: 100%; /* Adjust video width for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>ousslix</h1>
+</header>
+
+<div class="container">
+    <div class="image-section">
+        <img src="parasyte the graey.jpg" alt="Image">
+        <h3>Parasyte: The Grey</h3>
+    </div>
+    
+    <div class="description">
+        <h3>ملخص</h3>
+        <p>
+            <!-- Add your summary here -->
+        </p>
+    </div>
+</div>
+
+<div class="episode-controls">
+    <button onclick="loadVideo(0)">Episode 1</button>
+    <button onclick="loadVideo(1)">Episode 2</button>
+    <button onclick="loadVideo(2)">Episode 3</button>
+    <button onclick="loadVideo(3)">Episode 4</button>
+    <button onclick="loadVideo(4)">Episode 5</button>
+    <button onclick="loadVideo(5)">Episode 6</button>
+    <!-- Add more buttons as needed -->
+</div>
+
+<div class="video-wrapper">
+    <h2 id="episodeTitle">Episode 1</h2>
+    <div class="video-section">
+        <video id="videoPlayer" controls>
+            <source id="videoSource" src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+
+<script>
+    const videoData = [
+        { url: "https://pullzonetaher.b-cdn.net/stream/122/Parasyte%20The%20Grey/Parasyte%20The%20Grey%20S01%20001%201080p.mp4", title: "Episode 1" },
+        { url: "https://pullzonetaher.b-cdn.net/stream/122/Parasyte%20The%20Grey/Parasyte%20The%20Grey%20S01%20002%201080p.mp4", title: "Episode 2" },
+        { url: "https://pullzonetaher.b-cdn.net/stream/122/Parasyte%20The%20Grey/Parasyte%20The%20Grey%20S01%20003%201080p.mp4", title: "Episode 3" },
+        { url: "https://pullzonetaher.b-cdn.net/stream/122/Parasyte%20The%20Grey/Parasyte%20The%20Grey%20S01%20004%201080p.mp4", title: "Episode 4" },
+        { url: "https://pullzonetaher.b-cdn.net/stream/122/Parasyte%20The%20Grey/Parasyte%20The%20Grey%20S01%20005%201080p.mp4", title: "Episode 5" },
+        { url: "https://pullzonetaher.b-cdn.net/stream/122/Parasyte%20The%20Grey/Parasyte%20The%20Grey%20S01%20006%201080p.mp4", title: "Episode 6" },
+        // Add more video data up to 22
+    ];
+
+    const videoPlayer = document.getElementById("videoPlayer");
+    const videoSource = document.getElementById("videoSource");
+    const episodeTitle = document.getElementById("episodeTitle");
+
+    function loadVideo(index) {
+        if (index >= 0 && index < videoData.length) {
+            videoSource.src = videoData[index].url;
+            episodeTitle.textContent = videoData[index].title;
+            videoPlayer.load();
+        }
+    }
+
+    // Initial load
+    loadVideo(0);
+</script>
+
+</body>
+</html>
