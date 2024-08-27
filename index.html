@@ -13,6 +13,7 @@
             color: #fff;
             background-color: #141414;
         }
+
         header {
             background-color: #000;
             padding: 20px;
@@ -24,11 +25,13 @@
             justify-content: space-between;
             align-items: center;
         }
+
         header img {
             max-height: 50px;
             width: auto;
             display: block;
         }
+
         header button {
             background-color: transparent;
             border: 2px solid #e50914;
@@ -41,6 +44,7 @@
             position: relative;
             overflow: hidden;
         }
+
         header button::before {
             content: '';
             position: absolute;
@@ -53,20 +57,66 @@
             transform: translate(-50%, -50%) scale(0);
             border-radius: 50%;
         }
+
         header button:hover::before {
             transform: translate(-50%, -50%) scale(1);
         }
+
         header button:hover {
             color: #fff;
             background-color: #e50914;
             border-color: transparent;
         }
+
+        /* Tab Navigation Styles */
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            background-color: #000; /* Match with header */
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+            margin-top: 0; /* Remove gap between header and tabs */
+        }
+
+        .tab-buttons button {
+            flex: 1;
+            background-color: #000; /* Match with header */
+            color: #fff;
+            border: none;
+            padding: 15px 0;
+            font-size: 1em;
+            cursor: pointer;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            position: relative;
+        }
+
+        .tab-buttons button.active {
+            color: #e50914;
+        }
+
+        .tab-buttons button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 3px;
+            background-color: #e50914;
+            transition: width 0.3s ease;
+        }
+
+        .tab-buttons button:hover {
+            background-color: #1a1a1a;
+        }
+
         .movie-container {
             padding: 20px;
-            display: flex;
+            display: none; /* Hide all sections initially */
             flex-wrap: wrap;
             justify-content: center;
         }
+
         .movie-item {
             display: inline-block;
             width: 30%; /* Making width 30% to fit 3 items per row */
@@ -77,14 +127,17 @@
             position: relative;
             text-align: center;
         }
+
         .movie-item img {
             width: 100%;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
+
         .movie-item:hover {
             transform: scale(1.05);
         }
+
         .movie-item p {
             position: absolute;
             bottom: 0;
@@ -99,19 +152,28 @@
             border-bottom-right-radius: 10px;
             box-sizing: border-box;
         }
+
         @media (max-width: 768px) {
             header img {
                 max-height: 40px;
             }
+
             header button {
                 font-size: 0.8em;
                 padding: 5px 10px;
             }
+
             header {
                 padding: 10px;
             }
+
             .movie-item {
-                width: 30%; /* Ensuring 3 items per row on small screens */
+                width: 30%; /* Ensure 3 items per row on small screens */
+            }
+
+            .tab-buttons button {
+                font-size: 0.9em;
+                padding: 10px 0;
             }
         }
     </style>
@@ -123,13 +185,22 @@
     <button onclick="window.location.href='login.html';">login</button>
 </header>
 
-<div class="movie-container">
+<!-- Tab Buttons -->
+<div class="tab-buttons">
+    <button class="active" onclick="showSection('film-section')">Film</button>
+    <button onclick="showSection('serie-section')">Serie</button>
+    <button onclick="showSection('anime-section')">Anime</button>
+</div>
 
+
+
+
+<!-- Film Section -->
+<div id="film-section" class="movie-container" style="display: flex;">
     <div class="movie-item" onclick="window.location.href='Deadpool & Wolverine.html';">
         <img src="Deadpool & Wolverine.jpg" alt="Movie 1">
         <p>Deadpool & Wolverine</p>
     </div>
-
     <div class="movie-item" onclick="window.location.href='john wick.html';">
         <img src="john wick.jpg" alt="Movie 2">
         <p>john wick</p>
@@ -138,16 +209,59 @@
         <img src="21.jpg" alt="Movie 3">
         <p>21</p>
     </div>
+    <!-- Add more movie items for films here -->
+</div>
+
+
+
+
+
+
+<!-- Serie Section -->
+<div id="serie-section" class="movie-container">
     <div class="movie-item" onclick="window.location.href='parasyte the graey.html';">
         <img src="parasyte the graey.jpg" alt="Movie 4">
         <p>Parasyte: The Grey</p>
     </div>
-    <div class="movie-item" onclick="window.location.href='prison break.html';">
-        <img src="prison break.jpg" alt="Movie 5">
-        <p>prison break</p>
-    </div>
-    <!-- Add more movie items here -->
+
+    <!-- Add more movie items for series here -->
 </div>
+
+
+
+
+
+
+
+<!-- Anime Section -->
+<div id="anime-section" class="movie-container">
+
+    <!-- Add more movie items for anime here -->
+</div>
+
+<script>
+    function showSection(sectionId) {
+        // Hide all movie containers
+        var sections = document.querySelectorAll('.movie-container');
+        sections.forEach(function(section) {
+            section.style.display = 'none';
+        });
+
+        // Show the selected section
+        var activeSection = document.getElementById(sectionId);
+        activeSection.style.display = 'flex';
+
+        // Update active button state
+        var buttons = document.querySelectorAll('.tab-buttons button');
+        buttons.forEach(function(button) {
+            button.classList.remove('active');
+        });
+
+        // Add active class to the clicked button
+        var clickedButton = document.querySelector('.tab-buttons button[onclick="showSection(\'' + sectionId + '\')"]');
+        clickedButton.classList.add('active');
+    }
+</script>
 
 </body>
 </html>
