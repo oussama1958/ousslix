@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ousslix</title>
+    <link rel="icon" href="https://photojpg.netlify.app/ousslix logo.png" type="image/png">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #141414;
+            color: #fff;
+        }
+        header {
+            background-color: #000;
+            padding: 15px 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header img {
+            max-width: 150px; /* Adjust the size as needed */
+            height: auto;
+            display: block;
+            margin: 0 auto; /* Center the image */
+        }
+        .container {
+            max-width: 100%;
+            margin: 20px auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .title {
+            background-color: #222;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .title h3 {
+            margin: 0;
+            color: #e50914;
+            font-size: 1.5em;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            letter-spacing: 1px;
+        }
+        .video-wrapper {
+            background-color: #222;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            max-width: 100%;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid #444;
+            margin-top: 20px;
+        }
+        .video-wrapper h2 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #fff;
+            background-color: #e50914;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .video-wrapper .video-section {
+            position: relative;
+        }
+        .video-wrapper video {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+            margin-top: 20px;
+        }
+        .episode-controls {
+            display: flex;
+            flex-wrap: nowrap; /* Keep buttons in a horizontal line */
+            padding: 10px;
+            background-color: #00000080;
+            position: sticky;
+            bottom: 0; /* Position at the bottom of the container */
+            left: 0; /* Align to the left */
+            right: 0; /* Align to the right */
+            z-index: 1000;
+            transition: transform 0.3s ease;
+            transform: translateY(0); /* Show by default */
+            overflow-x: auto; /* Allow horizontal scrolling */
+            gap: 10px; /* Spacing between buttons */
+            margin-top: 15px; /* Space between the video and the controls */
+        }
+        .episode-controls button {
+            flex: 0 0 auto; /* Buttons will not grow, but can shrink */
+            background-color: #e50914;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-align: center; /* Center text in button */
+        }
+        .episode-controls button:hover {
+            background-color: #f40612;
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+        @media (max-width: 768px) {
+            .video-wrapper {
+                padding: 10px;
+            }
+            .episode-controls {
+                flex-direction: row; /* Keep buttons in a row on small screens */
+                padding: 5px;
+            }
+            .episode-controls button {
+                min-width: 80px; /* Ensure buttons are readable on small screens */
+                margin-right: 5px; /* Space between buttons */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="https://photojpg.netlify.app/ousslix.png" alt="ousslix logo">
+</header>
+
+<div class="container">
+    <div class="title">
+        <h3>Jujutsu Kaisen</h3>
+    </div>
+
+    <div class="video-wrapper">
+        <h2 id="episodeTitle">Episode 1</h2>
+        <div class="video-section">
+            <video id="videoPlayer" controls>
+                <source id="videoSource" src="https://pullzonetaher.b-cdn.net/Anime/Jujutsu%20Kaisen/Jujutsu%20Kaisen%20001%20720p.mp4 " type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <div class="episode-controls">
+        <!-- Buttons will be dynamically generated here -->
+    </div>
+</div>
+
+<script>
+    const videoData = Array.from({ length: 24 }, (_, i) => {
+        const episodeNumber = String(i + 1).padStart(2, '0');
+        return {
+            url: `https://pullzonetaher.b-cdn.net/Anime/Jujutsu%20Kaisen/Jujutsu%20Kaisen%200${episodeNumber}%20720p.mp4`,
+            title: `Episode ${i + 1}`
+        };
+    });
+
+    function loadVideo(index) {
+        const video = videoData[index];
+        document.getElementById('videoSource').src = video.url;
+        document.getElementById('episodeTitle').textContent = video.title;
+        document.getElementById('videoPlayer').load();
+    }
+
+    function generateButtons() {
+        const controlsContainer = document.querySelector('.episode-controls');
+        controlsContainer.innerHTML = ''; // Clear any existing buttons
+        videoData.forEach((video, index) => {
+            const button = document.createElement('button');
+            button.textContent = video.title;
+            button.onclick = () => loadVideo(index);
+            controlsContainer.appendChild(button);
+        });
+    }
+
+    // Generate buttons when the page loads
+    window.onload = generateButtons;
+</script>
+
+</body>
+</html>
