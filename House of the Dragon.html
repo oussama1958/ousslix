@@ -20,79 +20,33 @@
             top: 0;
             z-index: 1000;
         }
-        header h1 {
-            margin: 0;
-            color: #e50914;
-            font-size: 2.2em;
+        header img {
+            max-width: 150px; /* Adjust the size as needed */
+            height: auto;
+            display: block;
+            margin: 0 auto; /* Center the image */
         }
         .container {
-            max-width: 800px;
+            max-width: 100%;
             margin: 20px auto;
             padding: 20px;
+            box-sizing: border-box;
         }
-        .image-section {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            background-color: #222;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
-        }
-        .image-section img {
-            width: 120px; /* Adjusted width */
-            height: auto;
-            border-radius: 8px;
-            margin-right: 15px;
-        }
-        .image-section h3 {
-            margin: 0;
-            color: #fff;
-            font-size: 1.1em;
-        }
-        .description {
+        .title {
             background-color: #222;
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
             margin-bottom: 20px;
+            text-align: center;
         }
-        .description h3 {
+        .title h3 {
             margin: 0;
             color: #e50914;
-            font-size: 1.3em;
-            border-bottom: 2px solid #e50914;
-            padding-bottom: 5px;
-        }
-        .description p {
-            margin: 10px 0 0;
-            font-size: 0.95em;
-            line-height: 1.6;
-        }
-        .episode-controls {
-            display: flex;
-            overflow-x: auto;
-            padding: 10px 0;
-            border-bottom: 2px solid #444;
-            margin-bottom: 20px;
-            background-color: #000; /* Background color to make it distinct */
-            position: sticky;
-            top: 0; /* Position it above the video */
-            z-index: 1000;
-        }
-        .episode-controls button {
-            background-color: #e50914;
-            color: #fff;
-            border: none;
-            padding: 10px 25px; /* Adjusted padding for button size */
-            margin-right: 10px;
-            border-radius: 10px; /* Rounded corners */
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-        }
-        .episode-controls button:hover {
-            background-color: #f40612;
+            font-size: 1.5em;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            letter-spacing: 1px;
         }
         .video-wrapper {
             background-color: #222;
@@ -102,34 +56,73 @@
             max-width: 100%;
             overflow: hidden;
             position: relative;
-            border: 2px solid #444; /* Add border to create a special frame */
-            margin-top: 20px; /* Add margin to push the video down */
+            border: 2px solid #444;
+            margin-top: 20px;
         }
         .video-wrapper h2 {
             margin: 0;
-            font-size: 1.5em; /* Increased font size for better visibility */
+            font-size: 1.5em;
             color: #fff;
-            background-color: #e50914; /* Red background for the title */
+            background-color: #e50914;
             padding: 10px;
             border-radius: 5px;
             display: inline-block;
-            font-family: 'Comic Sans MS', cursive, sans-serif; /* Apply cartoonish font */
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Optional: add text shadow for better contrast */
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
         .video-wrapper .video-section {
             position: relative;
         }
         .video-wrapper video {
             width: 100%;
-            height: auto; /* Maintain aspect ratio */
-            max-width: 640px; /* Adjusted width for a smaller size */
+            height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
-            margin-top: 20px; /* Push the video down */
+            margin-top: 20px;
+        }
+        .episode-controls {
+            display: flex;
+            flex-wrap: nowrap; /* Keep buttons in a horizontal line */
+            padding: 10px;
+            background-color: #00000080;
+            position: sticky;
+            bottom: 0; /* Position at the bottom of the container */
+            left: 0; /* Align to the left */
+            right: 0; /* Align to the right */
+            z-index: 1000;
+            transition: transform 0.3s ease;
+            transform: translateY(0); /* Show by default */
+            overflow-x: auto; /* Allow horizontal scrolling */
+            gap: 10px; /* Spacing between buttons */
+            margin-top: 15px; /* Space between the video and the controls */
+        }
+        .episode-controls button {
+            flex: 0 0 auto; /* Buttons will not grow, but can shrink */
+            background-color: #e50914;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-align: center; /* Center text in button */
+        }
+        .episode-controls button:hover {
+            background-color: #f40612;
+            transform: scale(1.05); /* Slightly enlarge on hover */
         }
         @media (max-width: 768px) {
-            .video-wrapper video {
-                max-width: 100%; /* Adjust video width for smaller screens */
+            .video-wrapper {
+                padding: 10px;
+            }
+            .episode-controls {
+                flex-direction: row; /* Keep buttons in a row on small screens */
+                padding: 5px;
+            }
+            .episode-controls button {
+                min-width: 80px; /* Ensure buttons are readable on small screens */
+                margin-right: 5px; /* Space between buttons */
             }
         }
     </style>
@@ -137,79 +130,59 @@
 <body>
 
 <header>
-    <h1>ousslix</h1>
+    <img src="https://photojpg.netlify.app/ousslix.png" alt="ousslix logo">
 </header>
 
 <div class="container">
-    <div class="image-section">
-        <img src="https://photojpg.netlify.app/House of the Dragon.jpg" alt="Image">
+    <div class="title">
         <h3>House of the Dragon</h3>
     </div>
-    
-    <div class="description">
-        <h3>ملخص</h3>
-        <p>
-            <!-- Add your summary here -->
-        </p>
+
+    <div class="video-wrapper">
+        <h2 id="episodeTitle">Episode 1</h2>
+        <div class="video-section">
+            <video id="videoPlayer" controls>
+                <source id="videoSource" src="https://pullzonetaher.b-cdn.net/Series/House%20of%20the%20Dragon%202022/01/House%20of%20the%20Dragon%202022%20S01%20001%201080p.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
     </div>
-</div>
 
-<div class="episode-controls">
-    <button onclick="loadVideo(0)">Episode 1</button>
-    <button onclick="loadVideo(1)">Episode 2</button>
-    <button onclick="loadVideo(2)">Episode 3</button>
-    <button onclick="loadVideo(3)">Episode 4</button>
-    <button onclick="loadVideo(4)">Episode 5</button>
-    <button onclick="loadVideo(5)">Episode 6</button>
-    <button onclick="loadVideo(6)">Episode 7</button>
-    <button onclick="loadVideo(7)">Episode 8</button>
-    <button onclick="loadVideo(8)">Episode 9</button>
-    <button onclick="loadVideo(9)">Episode 10</button>
-</div>
-
-<div class="video-wrapper">
-    <h2 id="episodeTitle">Episode 1</h2>
-    <div class="video-section">
-        <video id="videoPlayer" controls>
-            <source id="videoSource" src="https://pullzonetaher.b-cdn.net/Series/House%20of%20the%20Dragon%202022/01/House%20of%20the%20Dragon%202022%20S01%20001%201080p.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+    <div class="episode-controls">
+        <!-- Buttons will be dynamically generated here -->
     </div>
 </div>
 
 <script>
-    // Array of video URLs and episode titles
-    const videoData = [
-        { url: "https://pullzonetaher.b-cdn.net/Series/House%20of%20the%20Dragon%202022/01/House%20of%20the%20Dragon%202022%20S01%20001%201080p.mp4", title: "Episode 1" },
-        { url: "https://pullzonetaher.b-cdn.net/Series/House%20of%20the%20Dragon%202022/01/House%20of%20the%20Dragon%202022%20S01%20002%201080p.mp4", title: "Episode 2" },
-        { url: "https://pullzonetaher.b-cdn.net/Series/House%20of%20the%20Dragon%202022/01/House%20of%20the%20Dragon%202022%20S01%20003%201080p.mp4", title: "Episode 3" },
-        { url: "https://pullzonetaher.b-cdn.net/Series/House%20of%20the%20Dragon%202022/01/House%20of%20the%20Dragon%202022%20S01%20004%201080p.mp4", title: "Episode 4" },
-        { url: "https://pullzonetaher.b-cdn.net/Series/House%20of%20the%20Dragon%202022/01/House%20of%20the%20Dragon%202022%20S01%20005%201080p.mp4", title: "Episode 5" },
-        { url: "https://pullzonetaher.b-cdn.net/Series/House%20of%20the%20Dragon%202022/01/House%20of%20the%20Dragon%202022%20S01%20006%201080p.mp4", title: "Episode 6" },
-        { url: "https://pullzonetaher.b-cdn.net/Series/House%20of%20the%20Dragon%202022/01/House%20of%20the%20Dragon%202022%20S01%20007%201080p.mp4", title: "Episode 7" },
-        { url: "https://pullzonetaher.b-cdn.net/Series/House%20of%20the%20Dragon%202022/01/House%20of%20the%20Dragon%202022%20S01%20008%201080p.mp4", title: "Episode 8" },
-        { url: "https://pullzonetaher.b-cdn.net/Series/House%20of%20the%20Dragon%202022/01/House%20of%20the%20Dragon%202022%20S01%20009%201080p.mp4", title: "Episode 9" },
-        { url: "https://pullzonetaher.b-cdn.net/Series/House%20of%20the%20Dragon%202022/01/House%20of%20the%20Dragon%202022%20S01%20010%201080p.mp4", title: "Episode 10" }
-    ];
-
-    // Get the video element
-    const videoPlayer = document.getElementById("videoPlayer");
-    const videoSource = document.getElementById("videoSource");
-    const episodeTitle = document.getElementById("episodeTitle");
+    const videoData = Array.from({ length: 10 }, (_, i) => {
+        const episodeNumber = String(i + 1).padStart(2, '0');
+        return {
+            url: `https://pullzonetaher.b-cdn.net/Series/House%20of%20the%20Dragon%202022/01/House%20of%20the%20Dragon%202022%20S01%200${episodeNumber}%201080p.mp4`,
+            title: `Episode ${i + 1}`
+        };
+    });
 
     function loadVideo(index) {
-        if (index >= 0 && index < videoData.length) {
-            videoSource.src = videoData[index].url;
-            episodeTitle.textContent = videoData[index].title;
-            videoPlayer.load();
-        }
+        const video = videoData[index];
+        document.getElementById('videoSource').src = video.url;
+        document.getElementById('episodeTitle').textContent = video.title;
+        document.getElementById('videoPlayer').load();
     }
 
-    // Initial load
-    loadVideo(0);
+    function generateButtons() {
+        const controlsContainer = document.querySelector('.episode-controls');
+        controlsContainer.innerHTML = ''; // Clear any existing buttons
+        videoData.forEach((video, index) => {
+            const button = document.createElement('button');
+            button.textContent = video.title;
+            button.onclick = () => loadVideo(index);
+            controlsContainer.appendChild(button);
+        });
+    }
+
+    // Generate buttons when the page loads
+    window.onload = generateButtons;
 </script>
-
-
 
 </body>
 </html>
